@@ -32,6 +32,8 @@ def nve_api(lat, lon, startdato, sluttdato, para):
     return verdier
 
 def klima_dataframe3h(lat, lon, startdato, sluttdato, parametere):
+    lon = int(float(lon.strip()))
+    lat = int(float(lat.strip()))
     print(f'lat{lat} lon {lon}')
     parameterdict = {}
     for parameter in parametere:
@@ -71,7 +73,6 @@ output = st_folium(m, width = 700, height=500)
 utm_lat = 0
 utm_lon = 0
 st.write('Trykk i kartet, eller skriv inn koordinater for å velge klimapunkt.')
-st.write('Finn automatisk nærmaste stadnavn dersom det er eit navn innafor 500m radius.')
 
 
 try:
@@ -89,21 +90,9 @@ except TypeError:
 lat = st.text_input("NORD(UTM 33)", utm_nord)
 lon = st.text_input("ØST  (UTM 33)", utm_ost)
 
-lon = int(float(lon.strip()))
-lat = int(float(lat.strip()))
 
 
-try:
-    navn = klimadata.stedsnavn(utm_nord, utm_ost)['navn'][0]['stedsnavn'][0]['skrivemåte']
-except (IndexError, KeyError):
-    navn = 'Skriv inn navn'
-#st.write(navn)
-#st.write(navn['navn'][0]['stedsnavn'][0]['skrivemåte'])
-
-#st.write(klimadata.stedsnavn(lng, lat))
-lokalitet = st.text_input("Gi navn til lokalitet", navn)
-
-start_3h_dato = st.text_input("Gi startdato, må ha riktig format (mellom 01-01-2010 og dagens dato)", '2021-12-24')
+start_3h_dato = st.text_input("Gi startdato, må ha riktig format (mellom 01-01-2010 og dagens dato)", '2019-07-28')
 antall_dager = st.text_input("Gi antall dager (fungerer best med intill 7 dager)", '5')
 
 start3h_dato = datetime.datetime(int(start_3h_dato[0:4]), int(start_3h_dato[5:7]), int(start_3h_dato[8:10]))
