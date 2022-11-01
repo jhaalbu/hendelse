@@ -2,8 +2,6 @@ from matplotlib import pyplot as plt
 import streamlit as st
 from pyproj import CRS
 from pyproj import Transformer
-import klimadata
-import plot
 import folium
 from streamlit_folium import st_folium
 import pandas as pd
