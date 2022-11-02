@@ -95,6 +95,8 @@ lon = st.text_input("ØST  (UTM 33)", utm_ost)
 start_3h_dato = st.date_input("Gi startdato (data fra 2010-01-01", datetime.date(2019, 7, 28))
 antall_dager = st.text_input("Gi antall dager (fungerer best med intill 7 dager)", '5')
 
+start3h_dato = datetime.datetime(int(start_3h_dato[0:4]), int(start_3h_dato[5:7]), int(start_3h_dato[8:10]))
+
 sluttdato_berekna = start3h_dato + datetime.timedelta(days=int(antall_dager))
 
 startdato_str = str(start3h_dato)[0:10]
