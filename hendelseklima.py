@@ -95,11 +95,11 @@ lon = st.text_input("ØST  (UTM 33)", utm_ost)
 start_3h_dato = st.date_input("Gi startdato (data fra 2010-01-01", datetime.date(2019, 7, 28))
 antall_dager = st.text_input("Gi antall dager (fungerer best med intill 7 dager)", '5')
 
-start3h_dato = datetime.datetime(int(start_3h_dato[0:4]), int(start_3h_dato[5:7]), int(start_3h_dato[8:10]))
+#start3h_dato = datetime.datetime(int(start_3h_dato[0:4]), int(start_3h_dato[5:7]), int(start_3h_dato[8:10]))
 
-sluttdato_berekna = start3h_dato + datetime.timedelta(days=int(antall_dager))
+sluttdato_berekna = start_3h_dato + datetime.timedelta(days=int(antall_dager))
 
-startdato_str = str(start3h_dato)[0:10]
+startdato_str = str(start_3h_dato)[0:10]
 sluttdato_str = str(sluttdato_berekna)[0:10]
 print(start_3h_dato)
 print(sluttdato_str)
@@ -108,7 +108,7 @@ print(utm_nord, utm_ost)
 knapp = st.button('Vis plott')
 
 if knapp:
-    df, altitude = klima_dataframe3h(lon, lat, start_3h_dato, sluttdato_str, parameterliste_3h)
+    df, altitude = klima_dataframe3h(lon, lat, startdato_str, sluttdato_str, parameterliste_3h)
     fig = plt.figure(figsize=(15,8)) 
     ax1 = fig.add_subplot(111)
     ax1.set_title('Værdata - 3timer nedbør og temperatur')
